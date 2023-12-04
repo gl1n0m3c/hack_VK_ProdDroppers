@@ -9,6 +9,8 @@ from sqlalchemy import pool
 from alembic import context
 
 from models.database import Base
+from models.rooms.models import Room, RoomUser
+from models.users.models import User
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -16,7 +18,7 @@ config = context.config
 
 load_dotenv()
 
-config.set_main_option("sqlalchemy.url", os.getenv["POSTGRESQL_PATH"])
+config.set_main_option("sqlalchemy.url", os.environ["POSTGRESQL_PATH"])
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:
