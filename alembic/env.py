@@ -9,8 +9,7 @@ from sqlalchemy import pool
 from alembic import context
 
 from models.database import Base
-from models.rooms.models import Room, RoomUser
-from models.users.models import User
+from models.models import Room, RoomUser, User
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
