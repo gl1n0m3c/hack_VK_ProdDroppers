@@ -22,6 +22,8 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     id_vk = Column(Integer, index=True, unique=True)
     token_vk = Column(String, unique=True)
+    firstname = Column(String)
+    lastname = Column(String)
 
     rooms = relationship("RoomUser", back_populates="user")
 
