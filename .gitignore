@@ -1,6 +1,7 @@
 venv
 .vscode
 __pycache__
+.env
 
 dev.in
 prod.in

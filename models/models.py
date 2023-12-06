@@ -6,26 +6,25 @@ from models.database import Base
 default_invent = "0/" * 9 + "0"
 
 
-class Room(Base):
-    __tablename__ = "rooms"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(52))
-    password = Column(Integer)
-
-    users = relationship("RoomUser", back_populates="room")
-
-
 class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    id_vk = Column(Integer, index=True, unique=True)
     token_vk = Column(String, unique=True)
     firstname = Column(String)
     lastname = Column(String)
 
     rooms = relationship("RoomUser", back_populates="user")
+
+
+class Room(Base):
+    __tablename__ = "rooms"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(52))
+    password = Column(Integer, nullable=True)
+
+    users = relationship("RoomUser", back_populates="room")
 
 
 class RoomUser(Base):

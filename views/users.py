@@ -1,11 +1,12 @@
 from sqlalchemy.orm import Session
 
+from constants.constants import MAX_ON_PAGE
 from models.models import Friends, User
 
 from schemas.responses.users.friends import FriendsSchema, ListFriendsSchema
 
 
-def get_friends(id_vk: int, db: Session):
+def get_friends(id_vk: int, page: int, db: Session):
     friends = (
         db.query(
             Friends.user2_id,
@@ -14,7 +15,8 @@ def get_friends(id_vk: int, db: Session):
         )
         .join(User, Friends.user2_id == User.id)
         .filter(Friends.user1_id == id_vk)
-        .all()
+        .offset(page * MAX_ON_PAGE)
+        .limit(MAX_ON_PAGE)
     )
 
     friends_data = [

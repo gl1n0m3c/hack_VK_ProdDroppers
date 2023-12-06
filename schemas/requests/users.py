@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class UserCreate(BaseModel):
+class UserCreateSchema(BaseModel):
     id_vk: int
     token_vk: str
     firstname: str

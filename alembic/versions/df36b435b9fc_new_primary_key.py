@@ -1,8 +1,8 @@
-"""cascade
+"""new_primary_key
 
-Revision ID: acf3fc3245af
+Revision ID: df36b435b9fc
 Revises: 
-Create Date: 2023-12-06 01:16:20.615450
+Create Date: 2023-12-06 23:50:58.756876
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'acf3fc3245af'
+revision: str = 'df36b435b9fc'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -29,13 +29,13 @@ def upgrade() -> None:
     op.create_index(op.f('ix_rooms_id'), 'rooms', ['id'], unique=False)
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('id_vk', sa.Integer(), nullable=True),
     sa.Column('token_vk', sa.String(), nullable=True),
+    sa.Column('firstname', sa.String(), nullable=True),
+    sa.Column('lastname', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('token_vk')
     )
     op.create_index(op.f('ix_users_id'), 'users', ['id'], unique=False)
-    op.create_index(op.f('ix_users_id_vk'), 'users', ['id_vk'], unique=True)
     op.create_table('friends',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user1_id', sa.Integer(), nullable=True),
@@ -87,7 +87,6 @@ def downgrade() -> None:
     op.drop_index(op.f('ix_friends_user1_id'), table_name='friends')
     op.drop_index(op.f('ix_friends_id'), table_name='friends')
     op.drop_table('friends')
-    op.drop_index(op.f('ix_users_id_vk'), table_name='users')
     op.drop_index(op.f('ix_users_id'), table_name='users')
     op.drop_table('users')
     op.drop_index(op.f('ix_rooms_id'), table_name='rooms')
