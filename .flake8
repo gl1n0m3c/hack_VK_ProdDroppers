@@ -1,0 +1,7 @@
+[flake8]
+exclude = .git, versions, __pycache__, .venv, .vscode, venv
+import-order-style = google
+inline-quotes = double
+max-complexity = 10
+max-line-length = 79
+application-import-names = 

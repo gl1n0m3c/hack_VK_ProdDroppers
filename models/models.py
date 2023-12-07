@@ -21,7 +21,7 @@ class Room(Base):
     __tablename__ = "rooms"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(52))
+    name = Column(String(52), unique=True)
     password = Column(Integer, nullable=True)
 
     users = relationship("RoomUser", back_populates="room")
