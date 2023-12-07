@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from constants.constants import MAX_ON_PAGE
 from models.models import Friends, User
 
-from schemas.responses.friends import FriendsSchema, ListFriendsSchema
+from schemas.responses.users import FriendsSchema, ListFriendsSchema
 
 
 def get_friends(id_vk: int, page: int, db: Session):
