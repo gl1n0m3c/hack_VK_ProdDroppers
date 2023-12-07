@@ -9,7 +9,11 @@ using EncancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 public class PlaceObject : MonoBehaviour
 {
     [SerializeField]
-    private GameObject prefab;
+    private GameObject prefab0;
+    [SerializeField]
+    private GameObject prefab1;
+    [SerializeField]
+    private GameObject prefab2;
 
     private ARRaycastManager aRRaycastManager;
     private ARPlaneManager aRPlaneManager;
@@ -44,7 +48,8 @@ public class PlaceObject : MonoBehaviour
             foreach (ARRaycastHit hit in hits)
             {
                 Pose pose = hit.pose;
-                GameObject obj = Instantiate(prefab, pose.position, pose.rotation);
+                GameObject[] prefabs = { prefab0, prefab1, prefab2 };
+                GameObject obj = Instantiate(prefabs[Random.Range(0, prefabs.Length)], pose.position, pose.rotation);
             }
         }
     }
