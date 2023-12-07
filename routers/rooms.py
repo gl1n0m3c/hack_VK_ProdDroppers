@@ -8,7 +8,7 @@ from schemas.responses.rooms import (
     ListFrienRoomsSchema,
     ListRoomSchema,
 )
-from schemas.responses.success import Success
+from schemas.responses.success import CreateRoomSuccess, Success
 from schemas.requests.rooms import RoomCreateSchema, UserToRoomSchema
 from views.rooms import all_rooms_view, friend_rooms_view, invent_view
 
@@ -17,7 +17,7 @@ router = APIRouter()
 
 @router.post(
     "/create_room/",
-    response_model=Success,
+    response_model=CreateRoomSuccess,
     status_code=status.HTTP_201_CREATED,
 )
 def create_room(data: RoomCreateSchema, db: Session = Depends(get_db)):

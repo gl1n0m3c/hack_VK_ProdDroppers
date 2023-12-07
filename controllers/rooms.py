@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from constants.constants import MAX_ROOMS
 from models.models import Room, RoomUser, User
 from schemas.requests.rooms import RoomCreateSchema, UserToRoomSchema
-from schemas.responses.success import Success
+from schemas.responses.success import CreateRoomSuccess, Success
 
 
 def rooms(id: int, db: Session):
@@ -55,7 +55,7 @@ def create_room_controller(data: RoomCreateSchema, db: Session):
         db.add(new_room_user)
         db.commit()
 
-        return Success(success=True)
+        return CreateRoomSuccess(success=True, id=new_room.id)
     return resault
 
 
