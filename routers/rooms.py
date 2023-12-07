@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 
 from controllers.rooms import create_room_controller, user_to_room_controller
 from models.database import get_db
-from schemas.responses.rooms import ListRoomSchema
+from schemas.responses.rooms import ListFrienRoomsSchema, ListRoomSchema
 from schemas.responses.success import Success
 from schemas.requests.rooms import RoomCreateSchema, UserToRoomSchema
-from views.rooms import all_rooms_view
+from views.rooms import all_rooms_view, friend_rooms_view
 
 router = APIRouter()
 
@@ -36,3 +36,12 @@ def user_to_room(data: UserToRoomSchema, db: Session = Depends(get_db)):
 )
 def all_rooms(page: int, db: Session = Depends(get_db)):
     return all_rooms_view(page=page, db=db)
+
+
+@router.get(
+    "/friend_rooms/{id_vk}/{page}/",
+    response_model=ListFrienRoomsSchema,
+    status_code=status.HTTP_200_OK,
+)
+def friend_rooms(id_vk: int, page: int, db: Session = Depends(get_db)):
+    return friend_rooms_view(id_vk=id_vk, page=page, db=db)

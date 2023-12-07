@@ -10,3 +10,12 @@ class RoomSchema(BaseModel):
 
 class ListRoomSchema(BaseModel):
     rooms: List[RoomSchema]
+
+
+class NameRoomsSchema(BaseModel):
+    name: str
+    rooms: List[RoomSchema]
+
+
+class ListFrienRoomsSchema(BaseModel):
+    friends: List[NameRoomsSchema]
