@@ -5,7 +5,7 @@ from controllers.users import auth_controller
 from models.database import get_db
 from schemas.requests.users import UserCreateSchema
 from schemas.responses.success import Success
-from schemas.responses.users.friends import ListFriendsSchema
+from schemas.responses.friends import ListFriendsSchema
 from views.users import get_friends
 
 
