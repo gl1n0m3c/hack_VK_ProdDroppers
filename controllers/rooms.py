@@ -33,6 +33,14 @@ def create_room_controller(data: RoomCreateSchema, db: Session):
 
     resault = rooms(id=data.id_vk, db=db)
     if resault == True:
+        room = db.query(Room).filter_by(name=data.name).first()
+
+        if room:
+            return Success(
+                bool=False,
+                description=["Комната с такими именем уже существует!"],
+            )
+
         new_room = Room(
             name=data.name,
             password=data.password,
@@ -41,11 +49,7 @@ def create_room_controller(data: RoomCreateSchema, db: Session):
         db.add(new_room)
         db.commit()
 
-        new_room = (
-            db.query(Room)
-            .filter_by(name=data.name, password=data.password)
-            .first()
-        )
+        new_room = db.query(Room).filter_by(name=data.name).first()
 
         new_room_user = RoomUser(
             user_id=data.id_vk,
