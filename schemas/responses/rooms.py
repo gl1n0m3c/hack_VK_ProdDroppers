@@ -19,3 +19,7 @@ class NameRoomsSchema(BaseModel):
 
 class ListFrienRoomsSchema(BaseModel):
     friends: List[NameRoomsSchema]
+
+
+class InventSchema(BaseModel):
+    invent: str

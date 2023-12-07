@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from constants.constants import MAX_ON_PAGE
 from models.models import Friends, Room, RoomUser, User
 from schemas.responses.rooms import (
+    InventSchema,
     NameRoomsSchema,
     ListFrienRoomsSchema,
     ListRoomSchema,
@@ -79,3 +80,13 @@ def friend_rooms_view(id_vk: int, page: int, db: Session):
     )
 
     return ListFrienRoomsSchema(friends=friends)
+
+
+def invent_view(id_vk: int, room_id: int, db: Session):
+    room = (
+        db.query(RoomUser.invent)
+        .filter(RoomUser.user_id == id_vk, RoomUser.room_id == room_id)
+        .first()
+    )
+
+    return InventSchema(invent=room[0])

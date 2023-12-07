@@ -22,7 +22,7 @@ def auth(data: UserCreateSchema, db: Session = Depends(get_db)):
 
 
 @router.get(
-    "/friends/{id_vk}/{page}/?page=5",
+    "/friends/{id_vk}/{page}/",
     response_model=ListFriendsSchema,
     status_code=status.HTTP_200_OK,
 )
