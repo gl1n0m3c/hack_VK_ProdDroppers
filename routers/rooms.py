@@ -1,15 +1,17 @@
+from typing import Union
+
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 from controllers.rooms import create_room_controller, user_to_room_controller
 from models.database import get_db
+from schemas.requests.rooms import RoomCreateSchema, UserToRoomSchema
 from schemas.responses.rooms import (
     InventSchema,
     ListFrienRoomsSchema,
     ListRoomSchema,
 )
 from schemas.responses.success import CreateRoomSuccess, Success
-from schemas.requests.rooms import RoomCreateSchema, UserToRoomSchema
 from views.rooms import all_rooms_view, friend_rooms_view, invent_view
 
 router = APIRouter()
@@ -17,7 +19,7 @@ router = APIRouter()
 
 @router.post(
     "/create_room/",
-    response_model=CreateRoomSuccess,
+    response_model=Union[CreateRoomSuccess, Success],
     status_code=status.HTTP_201_CREATED,
 )
 def create_room(data: RoomCreateSchema, db: Session = Depends(get_db)):

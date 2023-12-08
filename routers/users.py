@@ -27,4 +27,13 @@ def auth(data: UserCreateSchema, db: Session = Depends(get_db)):
     status_code=status.HTTP_200_OK,
 )
 def friends(id_vk: int, page: int, db: Session = Depends(get_db)):
-    return get_friends(id_vk=id_vk, page=page, db=db)
+    return get_friends(id_vk=id_vk, page=page, db=db, method="friends")
+
+
+@router.get(
+    "/waiters/{id_vk}/{page}/",
+    response_model=ListFriendsSchema,
+    status_code=status.HTTP_200_OK,
+)
+def waiters(id_vk: int, page: int, db: Session = Depends(get_db)):
+    return get_friends(id_vk=id_vk, page=page, db=db, method="waiters")

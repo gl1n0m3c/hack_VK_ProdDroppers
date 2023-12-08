@@ -4,9 +4,9 @@ from constants.constants import MAX_ON_PAGE
 from models.models import Friends, Room, RoomUser, User
 from schemas.responses.rooms import (
     InventSchema,
-    NameRoomsSchema,
     ListFrienRoomsSchema,
     ListRoomSchema,
+    NameRoomsSchema,
     RoomSchema,
 )
 
@@ -65,7 +65,7 @@ def friend_rooms_view(id_vk: int, page: int, db: Session):
                 NameRoomsSchema(
                     name=user_name,
                     rooms=rooms,
-                )
+                ),
             )
             rooms = []
 
@@ -76,7 +76,7 @@ def friend_rooms_view(id_vk: int, page: int, db: Session):
         NameRoomsSchema(
             name=user_name,
             rooms=rooms,
-        )
+        ),
     )
 
     return ListFrienRoomsSchema(friends=friends)

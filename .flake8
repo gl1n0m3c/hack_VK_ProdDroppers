@@ -1,7 +1,7 @@
 [flake8]
-exclude = .git, versions, __pycache__, .venv, .vscode, venv
+exclude = .git, versions, __pycache__, .venv, .vscode, venv, alembic
 import-order-style = google
 inline-quotes = double
 max-complexity = 10
 max-line-length = 79
-application-import-names = 
+application-import-names = alembic, constants, controllers, models, routers, schemas, views

@@ -17,7 +17,7 @@ def rooms(id: int, db: Session):
             description=[
                 f"Вы уже имеете {MAX_ROOMS} активные комнаты, "
                 "удалите 1 существующую, "
-                "чтобы создать новую"
+                "чтобы создать новую",
             ],
         )
     return True
@@ -32,12 +32,12 @@ def create_room_controller(data: RoomCreateSchema, db: Session):
         )
 
     resault = rooms(id=data.id_vk, db=db)
-    if resault == True:
+    if resault is True:
         room = db.query(Room).filter_by(name=data.name).first()
 
         if room:
             return Success(
-                bool=False,
+                success=False,
                 description=["Комната с такими именем уже существует!"],
             )
 
@@ -77,7 +77,7 @@ def user_to_room_controller(data: UserToRoomSchema, db: Session):
         return Success(success=True)
 
     resault = rooms(id=data.id_vk, db=db)
-    if resault == True:
+    if resault is True:
         room = RoomUser(
             user_id=data.id_vk,
             room_id=data.room_id,

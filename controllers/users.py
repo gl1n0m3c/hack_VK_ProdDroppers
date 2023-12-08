@@ -10,7 +10,8 @@ def auth_controller(data: UserCreateSchema, db: Session):
 
     if user:
         return Success(
-            success=True, description=["Пользователь авторизирован"]
+            success=True,
+            description=["Пользователь авторизирован"],
         )
 
     user = User(
