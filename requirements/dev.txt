@@ -5,68 +5,102 @@
 #    pip-compile '.\requirements\dev.in'
 #
 alembic==1.13.0
-    # via -r .\requirements\dev.in
+    # via -r .\requirements\prod.txt
 annotated-types==0.6.0
-    # via pydantic
+    # via
+    #   -r .\requirements\prod.txt
+    #   pydantic
 anyio==3.7.1
     # via
+    #   -r .\requirements\prod.txt
     #   fastapi
     #   starlette
 build==1.0.3
-    # via pip-tools
+    # via
+    #   -r .\requirements\prod.txt
+    #   pip-tools
 click==8.1.7
     # via
+    #   -r .\requirements\prod.txt
     #   pip-tools
     #   uvicorn
 colorama==0.4.6
     # via
+    #   -r .\requirements\prod.txt
     #   build
     #   click
 fastapi==0.104.1
-    # via -r .\requirements\dev.in
-greenlet==3.0.1
-    # via sqlalchemy
+    # via -r .\requirements\prod.txt
+greenlet==3.0.2
+    # via
+    #   -r .\requirements\prod.txt
+    #   sqlalchemy
 h11==0.14.0
-    # via uvicorn
+    # via
+    #   -r .\requirements\prod.txt
+    #   uvicorn
 idna==3.6
-    # via anyio
+    # via
+    #   -r .\requirements\prod.txt
+    #   anyio
 mako==1.3.0
-    # via alembic
+    # via
+    #   -r .\requirements\prod.txt
+    #   alembic
 markupsafe==2.1.3
-    # via mako
+    # via
+    #   -r .\requirements\prod.txt
+    #   mako
 packaging==23.2
-    # via build
+    # via
+    #   -r .\requirements\prod.txt
+    #   build
 pip-tools==7.3.0
-    # via -r .\requirements\dev.in
+    # via -r .\requirements\prod.txt
 psycopg2==2.9.9
-    # via -r .\requirements\dev.in
+    # via -r .\requirements\prod.txt
 pydantic==2.5.2
-    # via fastapi
+    # via
+    #   -r .\requirements\prod.txt
+    #   fastapi
 pydantic-core==2.14.5
-    # via pydantic
+    # via
+    #   -r .\requirements\prod.txt
+    #   pydantic
 pyproject-hooks==1.0.0
-    # via build
+    # via
+    #   -r .\requirements\prod.txt
+    #   build
 python-dotenv==1.0.0
-    # via -r .\requirements\dev.in
+    # via -r .\requirements\prod.txt
 sniffio==1.3.0
-    # via anyio
+    # via
+    #   -r .\requirements\prod.txt
+    #   anyio
 sqlalchemy==2.0.23
     # via
-    #   -r .\requirements\dev.in
+    #   -r .\requirements\prod.txt
     #   alembic
 starlette==0.27.0
-    # via fastapi
+    # via
+    #   -r .\requirements\prod.txt
+    #   fastapi
 typing-extensions==4.8.0
     # via
+    #   -r .\requirements\prod.txt
     #   alembic
     #   fastapi
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
 uvicorn==0.24.0.post1
-    # via -r .\requirements\dev.in
+    # via -r .\requirements\prod.txt
+websockets==12.0
+    # via -r .\requirements\prod.txt
 wheel==0.42.0
-    # via pip-tools
+    # via
+    #   -r .\requirements\prod.txt
+    #   pip-tools
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
