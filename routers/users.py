@@ -18,7 +18,7 @@ router = APIRouter()
     status_code=status.HTTP_200_OK,
 )
 def list_users(page: int = 0, start: str = "", db: Session = Depends(get_db)):
-    return get_users(page=page, start=start, db=db)
+    return get_users(page=page, start=start.lower(), db=db)
 
 
 @router.post(
@@ -44,7 +44,7 @@ def friends(
     return get_friends(
         id_vk=id_vk,
         page=page,
-        start=start,
+        start=start.lower(),
         db=db,
         method="friends",
     )
@@ -64,7 +64,7 @@ def waiters(
     return get_friends(
         id_vk=id_vk,
         page=page,
-        start=start,
+        start=start.lower(),
         db=db,
         method="waiters",
     )

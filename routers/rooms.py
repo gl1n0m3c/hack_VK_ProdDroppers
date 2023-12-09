@@ -42,7 +42,7 @@ def user_to_room(data: UserToRoomSchema, db: Session = Depends(get_db)):
     status_code=status.HTTP_200_OK,
 )
 def list_rooms(page: int = 0, start: str = "", db: Session = Depends(get_db)):
-    return all_rooms_view(page=page, start=start, db=db)
+    return all_rooms_view(page=page, start=start.lower(), db=db)
 
 
 @router.get(
@@ -56,7 +56,9 @@ def friend_rooms(
     start: str = "",
     db: Session = Depends(get_db),
 ):
-    return friend_rooms_view(id_vk=id_vk, page=page, start=start, db=db)
+    return friend_rooms_view(
+        id_vk=id_vk, page=page, start=start.lower(), db=db
+    )
 
 
 @router.get(
