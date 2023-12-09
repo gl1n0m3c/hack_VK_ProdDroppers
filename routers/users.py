@@ -5,11 +5,20 @@ from controllers.users import auth_controller
 from models.database import get_db
 from schemas.requests.users import UserCreateSchema
 from schemas.responses.success import Success
-from schemas.responses.users import ListFriendsSchema
-from views.users import get_friends
+from schemas.responses.users import ListFriendsSchema, ListUserSchema
+from views.users import get_friends, get_users
 
 
 router = APIRouter()
+
+
+@router.get(
+    "/list/",
+    response_model=ListUserSchema,
+    status_code=status.HTTP_200_OK,
+)
+def list_users(page: int = 0, start: str = "", db: Session = Depends(get_db)):
+    return get_users(page=page, start=start, db=db)
 
 
 @router.post(
@@ -22,18 +31,40 @@ def auth(data: UserCreateSchema, db: Session = Depends(get_db)):
 
 
 @router.get(
-    "/friends/{id_vk}/{page}/",
+    "/friends/{id_vk}/",
     response_model=ListFriendsSchema,
     status_code=status.HTTP_200_OK,
 )
-def friends(id_vk: int, page: int, db: Session = Depends(get_db)):
-    return get_friends(id_vk=id_vk, page=page, db=db, method="friends")
+def friends(
+    id_vk: int,
+    page: int = 0,
+    start: str = "",
+    db: Session = Depends(get_db),
+):
+    return get_friends(
+        id_vk=id_vk,
+        page=page,
+        start=start,
+        db=db,
+        method="friends",
+    )
 
 
 @router.get(
-    "/waiters/{id_vk}/{page}/",
+    "/waiters/{id_vk}/",
     response_model=ListFriendsSchema,
     status_code=status.HTTP_200_OK,
 )
-def waiters(id_vk: int, page: int, db: Session = Depends(get_db)):
-    return get_friends(id_vk=id_vk, page=page, db=db, method="waiters")
+def waiters(
+    id_vk: int,
+    page: int = 0,
+    start: str = "",
+    db: Session = Depends(get_db),
+):
+    return get_friends(
+        id_vk=id_vk,
+        page=page,
+        start=start,
+        db=db,
+        method="waiters",
+    )

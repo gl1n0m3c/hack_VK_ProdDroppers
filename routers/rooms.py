@@ -14,6 +14,7 @@ from schemas.responses.rooms import (
 from schemas.responses.success import CreateRoomSuccess, Success
 from views.rooms import all_rooms_view, friend_rooms_view, invent_view
 
+
 router = APIRouter()
 
 
@@ -36,21 +37,26 @@ def user_to_room(data: UserToRoomSchema, db: Session = Depends(get_db)):
 
 
 @router.get(
-    "/all_rooms/{page}/",
+    "/list/",
     response_model=ListRoomSchema,
     status_code=status.HTTP_200_OK,
 )
-def all_rooms(page: int, db: Session = Depends(get_db)):
-    return all_rooms_view(page=page, db=db)
+def list_rooms(page: int = 0, start: str = "", db: Session = Depends(get_db)):
+    return all_rooms_view(page=page, start=start, db=db)
 
 
 @router.get(
-    "/friend_rooms/{id_vk}/{page}/",
+    "/friend_rooms/{id_vk}/",
     response_model=ListFrienRoomsSchema,
     status_code=status.HTTP_200_OK,
 )
-def friend_rooms(id_vk: int, page: int, db: Session = Depends(get_db)):
-    return friend_rooms_view(id_vk=id_vk, page=page, db=db)
+def friend_rooms(
+    id_vk: int,
+    page: int = 0,
+    start: str = "",
+    db: Session = Depends(get_db),
+):
+    return friend_rooms_view(id_vk=id_vk, page=page, start=start, db=db)
 
 
 @router.get(

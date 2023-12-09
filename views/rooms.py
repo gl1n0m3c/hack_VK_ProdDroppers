@@ -11,8 +11,14 @@ from schemas.responses.rooms import (
 )
 
 
-def all_rooms_view(page: int, db: Session):
-    rooms = db.query(Room).offset(page * MAX_ON_PAGE).limit(MAX_ON_PAGE)
+def all_rooms_view(page: int, start: str, db: Session):
+    rooms = (
+        db.query(Room)
+        .filter(Room.name.startswith(start))
+        .order_by(Room.name)
+        .offset(page * MAX_ON_PAGE)
+        .limit(MAX_ON_PAGE)
+    )
 
     rooms_data = [
         RoomSchema(
@@ -26,7 +32,7 @@ def all_rooms_view(page: int, db: Session):
     return ListRoomSchema(rooms=rooms_data)
 
 
-def friend_rooms_view(id_vk: int, page: int, db: Session):
+def friend_rooms_view(id_vk: int, page: int, start: str, db: Session):
     friend_rooms = (
         db.query(
             User.id,
@@ -40,7 +46,10 @@ def friend_rooms_view(id_vk: int, page: int, db: Session):
         .join(User, Friends.user2_id == User.id)
         .join(RoomUser, Friends.user2_id == RoomUser.user_id)
         .join(Room, RoomUser.room_id == Room.id)
-        .filter(Friends.user1_id == id_vk)
+        .filter(
+            Friends.user1_id == id_vk,
+            Room.name.startswith(start),
+        )
         .order_by(User.lastname)
         .offset(page * MAX_ON_PAGE)
         .limit(MAX_ON_PAGE)

@@ -16,7 +16,6 @@ def auth_controller(data: UserCreateSchema, db: Session):
 
     user = User(
         id=data.id_vk,
-        token_vk=data.token_vk,
         firstname=data.firstname,
         lastname=data.lastname,
     )

@@ -11,7 +11,6 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    token_vk = Column(String, unique=True)
     firstname = Column(String)
     lastname = Column(String)
 

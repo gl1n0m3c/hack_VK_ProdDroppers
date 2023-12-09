@@ -1,8 +1,8 @@
-"""new_primary_key
+"""minus_tokena
 
-Revision ID: df36b435b9fc
+Revision ID: 0ae50394f20d
 Revises: 
-Create Date: 2023-12-06 23:50:58.756876
+Create Date: 2023-12-09 18:07:37.227321
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'df36b435b9fc'
+revision: str = '0ae50394f20d'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -24,16 +24,15 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=52), nullable=True),
     sa.Column('password', sa.Integer(), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
     )
     op.create_index(op.f('ix_rooms_id'), 'rooms', ['id'], unique=False)
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('token_vk', sa.String(), nullable=True),
     sa.Column('firstname', sa.String(), nullable=True),
     sa.Column('lastname', sa.String(), nullable=True),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('token_vk')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_users_id'), 'users', ['id'], unique=False)
     op.create_table('friends',
