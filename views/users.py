@@ -21,7 +21,7 @@ def get_friends(id_vk: int, page: int, start: str, db: Session, method: str):
             .join(User, Friends.user2_id == User.id)
             .filter(
                 Friends.user1_id == id_vk,
-                User.firstname.startswith(start),
+                User.firstname.ilike(f"{start}%"),
             )
             .order_by(User.firstname)
             .offset(page * MAX_ON_PAGE)
@@ -56,7 +56,7 @@ def get_friends(id_vk: int, page: int, start: str, db: Session, method: str):
 def get_users(page: int, start: str, db: Session):
     users = (
         db.query(User.id, User.firstname, User.lastname)
-        .filter(User.firstname.startswith(start))
+        .filter(User.firstname.ilike(f"{start}%"))
         .order_by(User.firstname)
         .offset(page * MAX_ON_PAGE)
         .limit(MAX_ON_PAGE)

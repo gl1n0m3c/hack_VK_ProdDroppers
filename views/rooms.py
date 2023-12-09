@@ -14,7 +14,7 @@ from schemas.responses.rooms import (
 def all_rooms_view(page: int, start: str, db: Session):
     rooms = (
         db.query(Room)
-        .filter(Room.name.startswith(start))
+        .filter(Room.name.ilike(f"{start}%"))
         .order_by(Room.name)
         .offset(page * MAX_ON_PAGE)
         .limit(MAX_ON_PAGE)
@@ -48,7 +48,7 @@ def friend_rooms_view(id_vk: int, page: int, start: str, db: Session):
         .join(Room, RoomUser.room_id == Room.id)
         .filter(
             Friends.user1_id == id_vk,
-            Room.name.startswith(start),
+            Room.name.ilike(f"{start}%"),
         )
         .order_by(User.lastname)
         .offset(page * MAX_ON_PAGE)
