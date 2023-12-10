@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from routers.friends import router as friends_router
 from routers.rooms import router as rooms_router
 from routers.users import router as users_router
-from routers.websockets.rooms import router as websocket_rooms_router
+from routers.websockets.sockets import router as websocket_rooms_router
 
 
 app = FastAPI()

@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from models.database import Base
 
 
-default_invent = "0/" * 9 + "0"
+default_invent = "0/" * 37 + "0"
 
 
 class User(Base):

@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
-from controllers.users import auth_controller
+from controllers.users import auth_controller, сhange_invent_controller
 from models.database import get_db
-from schemas.requests.users import UserCreateSchema
+from schemas.requests.users import ChangeInventSchema, UserCreateSchema
 from schemas.responses.success import Success
 from schemas.responses.users import ListFriendsSchema, ListUserSchema
 from views.users import get_friends, get_users
@@ -68,3 +68,12 @@ def waiters(
         db=db,
         method="waiters",
     )
+
+
+@router.post(
+    "/change_invent/",
+    response_model=Success,
+    status_code=status.HTTP_201_CREATED,
+)
+def change_invent(data: ChangeInventSchema, db: Session = Depends(get_db)):
+    return сhange_invent_controller(data=data, db=db)
