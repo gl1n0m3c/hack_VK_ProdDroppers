@@ -57,7 +57,10 @@ def friend_rooms(
     db: Session = Depends(get_db),
 ):
     return friend_rooms_view(
-        id_vk=id_vk, page=page, start=start.lower(), db=db
+        id_vk=id_vk,
+        page=page,
+        start=start.lower(),
+        db=db,
     )
 
 

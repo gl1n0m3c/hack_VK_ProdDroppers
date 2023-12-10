@@ -1,5 +1,5 @@
-from typing import List
 import json
+from typing import List
 
 from fastapi import APIRouter, WebSocket
 
@@ -50,7 +50,6 @@ async def chat(websocket: WebSocket, room_id: int):
             data_dump = json.loads(data)
             action = data_dump["action"]
             location_id = data_dump["location_id"]
-            print(action, location_id)
 
             if action == 0:
                 for ws in manager.active_connections:
